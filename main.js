@@ -41,6 +41,8 @@ function modFun(){
   console.log(a / 100)  // factor
 
   jDivision(15098,100)
+  jDivision(100,100)
+  jDivision(5,2)
 
 }
 
@@ -49,15 +51,14 @@ function jMod(n, m)
   return ((( n % m) + m) % m);
 }
 
-
 function jDivision(n,m)
 {
   let factors = 0, t = n;
 
   if(n < m)
-    return -0;
+    return
 
-  while(t > 0)
+  while(t > m)
   {
     t -= m;
     factors++
@@ -65,7 +66,7 @@ function jDivision(n,m)
 
   let remainder = t;
 
-  console.log(factors, n, factors * m , remainder)
+  console.log(factors, n, factors * m , remainder, factors * m + remainder)
 
 
 }
