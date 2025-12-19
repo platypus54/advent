@@ -46,6 +46,7 @@ function modFun(){
   jDivision(-100,100)
   jDivision(-13,100)
   jDivision(100, 0)
+  jDivision(.2, 99)
 
 }
 
@@ -60,11 +61,12 @@ function jDivision(n,divisor)
     let factors = 0, dividend = n;
     let remainder = 0;
 
+    if(dividend > 0 && dividend < 1)
+      return "no floats on this boat"
     if(divisor == 0)
-      return
-
+      return "bad"
     if(Math.abs(n) < divisor)
-      return
+      return "we are only whole at the moment"
 
     if (dividend == divisor)
     {
