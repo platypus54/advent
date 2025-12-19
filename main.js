@@ -64,6 +64,12 @@ function jDivision(n,m)
     factors++
   }
 
+   while(t < m)
+  {
+    t += m;
+    factors++
+  }
+
   let remainder = t;
 
   console.log(
