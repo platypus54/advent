@@ -1,3 +1,7 @@
+// can get pretty close to answer - floating point precision? %? 
+// need more exploring with % -> could be leading to errorneous output
+
+
 let TWO_PI = 2 * Math.PI;
 let CLICKS_TO_RADIANS = ( TWO_PI / 100);
 
@@ -10,7 +14,7 @@ class Combination {
     else if (direction == 'R')
       this.isRight = true;
 
-    this.clicks = n % 100;
+    this.clicks = n % 100; // remainder
     //this.angle = (CLICKS_TO_RADIANS * this.clicks);
   }
 }
