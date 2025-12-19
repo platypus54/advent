@@ -43,6 +43,9 @@ function modFun(){
   jDivision(15098,100)
   jDivision(100,100)
   jDivision(-12,2)
+  jDivision(-100,100)
+  jDivision(-13,100)
+  jDivision(100, 0)
 
 }
 
@@ -51,34 +54,48 @@ function jMod(n, m)
   return ((( n % m) + m) % m);
 }
 
-function jDivision(n,m)
+
+function jDivision(n,divisor)
 {
-  let factors = 0, t = n;
+    let factors = 0, dividend = n;
+    let remainder = 0;
 
-  if(Math.abs(n) < m)
-    return
+    if(divisor == 0)
+      return
 
-  while(t > m)
-  {
-    t -= m;
-    factors++
-  }
+    if(Math.abs(n) < divisor)
+      return
 
-   while(t < m)
-  {
-    t += m;
-    factors++
-  }
-
-  let remainder = t;
+    if (dividend == divisor)
+    {
+        remainder = 0;
+        factors = 1;
+    }
+    else if ( dividend > 0 )
+    {
+        while(dividend > divisor && dividend > 0)
+        {
+          dividend -= divisor;
+          factors++
+        }
+    }
+    else if (dividend < 0)
+    {
+      while(dividend < divisor && dividend < 0)
+        {
+          dividend += divisor;
+          factors++
+        }
+    }
+        remainder = dividend;
 
   console.log(
   "\starting number:\t", n,
   "\nfactors:\t", factors,
   "\ndividend:\t" ,n ,
-  "\nfactors * divisor:\t", factors * m ,
+  "\nfactors * divisor:\t", factors * divisor ,
   "\nremainder:\t", remainder,
-  "\ndividend * m + remainder:\t", factors * m + remainder)
+  "\nfactors * divisor + remainder:\t", factors * divisor + remainder)
 
 
 }
