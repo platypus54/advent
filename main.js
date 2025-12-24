@@ -18,11 +18,11 @@ class Info {
 
   toString(){
     console.log(
-    "\starting number:\t", this.D,
+    "\a:\t", this.D,
     "\ndivisor:\t", this.d,
     "\nquotient:\t", this.f,
     "\ndividend:\t" ,this.D ,
-    "\nfactors * divisor:\t", this.f * this.d ,
+    "\nquotient * divisor:\t", this.f * this.d ,
     "\nremainder:\t", this.r,
     "\nfactors * divisor + remainder:\t", this.f * this.d + this.r,
     "\n" + this.D + " =  " + this.f + " * " + this.d + " + " + this.r)
@@ -30,10 +30,11 @@ class Info {
     }
 }
 
-
-
 function main(t){
   let combinations = new Array();
+
+  jDRevision(10,0);
+  jDRevision(-12,2)
 
   for (var i = 0; i < t.length ; i++){
       combinations.push(data_to_combination(t[i]))
@@ -54,8 +55,6 @@ function data_to_combination(data_item){
   return new Combination(direction,clicks);
 }
 
-modFun()
-
 function modFun(){
 
   let a = -12;
@@ -72,6 +71,7 @@ function modFun(){
   jDivision(-13,100)
   jDivision(100, 0)
   jDivision(.2, 99)
+
 
 }
 
@@ -123,38 +123,30 @@ function jDRevision(a, b)
 {
   let remainder = 0;
   let quotient = 0;
-  let dividend = a;
+  let dividend = Math.abs(a);
   let divisor = b;
-
 
   if(divisor == 0)
     return "division by 0"
 
-  if ( dividend > 0 )
-  {
-      while(dividend > divisor)
-      {
-        dividend -= divisor;
-        quotient++
-      }
-  }
-  else if (dividend < 0)
-  {
-      while(dividend < divisor)
-      {
-          dividend += divisor;
-          quotient++
-      }
-         quotient *= -1
-   }
+    while(dividend > divisor)
+    {
+      dividend -= divisor;
+      quotient++
+    }
 
-      remainder = dividend;
+    if (a < 0)
+    {
+      quotient *= -1
+      remainder = dividend * -1
+
+    }else
+      remainder = dividend
 
   let meta = new Info(a,divisor,quotient,remainder);
   meta.toString();
 
 }
-
 
 
 
