@@ -5,21 +5,45 @@ test2 = [ ['R', '5'], ['L', '5'] ]
 test3 = [ ['R', '5'], ['L', '5'],['L', '1']]
 test4 = [ ['R', '5'], ['L', '5'],['L', '1'], ['R','50']]
 
-//main(cList);
+
+
+class Info {
+  constructor(a,b,c,d)
+  {
+    this.D = a;
+    this.d = b;
+    this.f = c;
+    this.r = d;
+  }
+
+  toString(){
+    console.log(
+    "\starting number:\t", this.D,
+    "\ndivisor:\t", this.d,
+    "\nfactors:\t", this.f,
+    "\ndividend:\t" ,this.D ,
+    "\nfactors * divisor:\t", this.f * this.d ,
+    "\nremainder:\t", this.r,
+    "\nfactors * divisor + remainder:\t", this.f * this.d + this.r)
+    }
+}
+
 
 
 function main(t){
   let combinations = new Array();
 
-  for (var i = 0; i < t.length ; i++)
+  for (var i = 0; i < t.length ; i++){
       combinations.push(data_to_combination(t[i]))
+      jDivision(Number(t[i][1]),100)
+  }
 
   console.log(combinations)
-  let dial = new Dial();
+  //let dial = new Dial();
 
-  dial.move(combinations);
+  //dial.move(combinations);
 
-  dial.print_summay();
+  //dial.print_summay();
 }
 
 function data_to_combination(data_item){
@@ -58,21 +82,16 @@ function jMod(n, m)
 
 function jDivision(n,divisor)
 {
-    let factors = 0, dividend = n;
+    let factors = 0
+    let dividend = n;
     let remainder = 0;
 
     if(dividend > 0 && dividend < 1)
       return "no floats on this boat"
     if(divisor == 0)
       return "bad"
-    if(Math.abs(n) < divisor)
-      return "we are only whole at the moment"
 
-    if (dividend == divisor)
-    {
-        remainder = 0;
-        factors = 1;
-    }
+
     else if ( dividend > 0 )
     {
         while(dividend > divisor && dividend > 0)
@@ -88,16 +107,15 @@ function jDivision(n,divisor)
           dividend += divisor;
           factors++
         }
+
+        factors *= -1
     }
-        remainder = dividend;
 
-  console.log(
-  "\starting number:\t", n,
-  "\nfactors:\t", factors,
-  "\ndividend:\t" ,n ,
-  "\nfactors * divisor:\t", factors * divisor ,
-  "\nremainder:\t", remainder,
-  "\nfactors * divisor + remainder:\t", factors * divisor + remainder)
+      remainder = dividend;
 
+    let meta = new Info(n,divisor,factors, remainder);
+    meta.toString()
 
 }
+
+main(cList);
