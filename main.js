@@ -20,11 +20,13 @@ class Info {
     console.log(
     "\starting number:\t", this.D,
     "\ndivisor:\t", this.d,
-    "\nfactors:\t", this.f,
+    "\nquotient:\t", this.f,
     "\ndividend:\t" ,this.D ,
     "\nfactors * divisor:\t", this.f * this.d ,
     "\nremainder:\t", this.r,
-    "\nfactors * divisor + remainder:\t", this.f * this.d + this.r)
+    "\nfactors * divisor + remainder:\t", this.f * this.d + this.r,
+    "\n" + this.D + " =  " + this.f + " * " + this.d + " + " + this.r)
+
     }
 }
 
@@ -35,7 +37,7 @@ function main(t){
 
   for (var i = 0; i < t.length ; i++){
       combinations.push(data_to_combination(t[i]))
-      jDivision(Number(t[i][1]),100)
+      jDRevision(Number(t[i][1]),100)
   }
 
   console.log(combinations)
@@ -59,7 +61,6 @@ function modFun(){
   let a = -12;
   let b = 502;
 
-
   console.log(a % 100) // remainder
   console.log(   ((( a % 100) + 100) % 100) )
   console.log(a / 100)  // factor
@@ -82,7 +83,7 @@ function jMod(n, m)
 
 function jDivision(n,divisor)
 {
-    let factors = 0
+    let quotient = 0
     let dividend = n;
     let remainder = 0;
 
@@ -97,7 +98,7 @@ function jDivision(n,divisor)
         while(dividend > divisor && dividend > 0)
         {
           dividend -= divisor;
-          factors++
+          quotient++
         }
     }
     else if (dividend < 0)
@@ -105,17 +106,60 @@ function jDivision(n,divisor)
       while(dividend < divisor && dividend < 0)
         {
           dividend += divisor;
-          factors++
+          quotient++
         }
 
-        factors *= -1
+        quotient *= -1
     }
 
       remainder = dividend;
 
-    let meta = new Info(n,divisor,factors, remainder);
+    let meta = new Info(n,divisor,quotient, remainder);
     meta.toString()
 
 }
+
+function jDRevision(a, b)
+{
+  let remainder = 0;
+  let quotient = 0;
+  let dividend = a;
+  let divisor = b;
+
+
+  if(divisor == 0)
+    return "division by 0"
+
+  if ( dividend > 0 )
+  {
+      while(dividend > divisor)
+      {
+        dividend -= divisor;
+        quotient++
+      }
+  }
+  else if (dividend < 0)
+  {
+      while(dividend < divisor)
+      {
+          dividend += divisor;
+          quotient++
+      }
+         quotient *= -1
+   }
+
+      remainder = dividend;
+
+  let meta = new Info(a,divisor,quotient,remainder);
+  meta.toString();
+
+}
+
+
+
+
+
+
+
 
 main(cList);
