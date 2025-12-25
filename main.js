@@ -44,18 +44,11 @@ class Info {
 function main(t){
   let combinations = new Array();
 
-  jDRevision(10,0);
-  jDRevision(-12,2)
-  jDRevision(-12, 2);
-  jDRevision(12, -2);
-  console.log(jDRevision(-12, -2));
-
-  // for (var i = 0; i < t.length ; i++){
-  //     combinations.push(data_to_combination(t[i]))
-  //     jDRevision(Number(t[i][1]),100)
-  // }
-
-  // console.log(combinations)
+   for (var i = 0; i < t.length ; i++)
+   {
+      combinations.push(data_to_combination(t[i]))
+      console.log(jDivision(Number(t[i][1]),100))
+   }
 
   //let dial = new Dial();
 
@@ -88,50 +81,32 @@ function modFun(){
 
 
 }
-function jMod(n, m)
-{
+function jMod(n, m){
   return ((( n % m) + m) % m);
 }
-function jDivision(n,divisor)
-{
-    let quotient = 0
-    let dividend = n;
-    let remainder = 0;
+function jDivision(a, b){
+    let quotient = 0;
+    let dividend = a;
+    let divisor = b
 
-    if(dividend > 0 && dividend < 1)
-      return "no floats on this boat"
     if(divisor == 0)
-      return "bad"
+      return -0
+    else if(divisor < 0)
+      return -0
 
-
-    else if ( dividend > 0 )
+    while(dividend >= divisor)
     {
-        while(dividend > divisor && dividend > 0)
-        {
-          dividend -= divisor;
-          quotient++
-        }
-    }
-    else if (dividend < 0)
-    {
-      while(dividend < divisor && dividend < 0)
-        {
-          dividend += divisor;
-          quotient++
-        }
-
-        quotient *= -1
+      dividend -= divisor;
+      ++quotient
     }
 
-      remainder = dividend;
+    let remainder = a - (quotient * b);
 
-    let meta = new Info(n,divisor,quotient, remainder);
-    meta.toString()
-
+    return ( new Pair(quotient, remainder) );
 }
 
 
-function jDRevision(a, b)
+function adventClicks(a, b)
 {
     let quotient = 0;
     let dividend = a;
@@ -150,11 +125,23 @@ function jDRevision(a, b)
 
     let remainder = a - (quotient * b);
 
-    let meta = new Info(a,b,quotient,remainder);
-    meta.toString();
-
     return ( new Pair(quotient, remainder) );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 main(cList);
