@@ -5,8 +5,6 @@ test2 = [ ['R', '5'], ['L', '5'] ]
 test3 = [ ['R', '5'], ['L', '5'],['L', '1']]
 test4 = [ ['R', '5'], ['L', '5'],['L', '1'], ['R','50']]
 
-
-
 class Info {
   constructor(a,b,c,d)
   {
@@ -35,13 +33,17 @@ function main(t){
 
   jDRevision(10,0);
   jDRevision(-12,2)
+  jDRevision(-12, 2);
+  jDRevision(12, -2);
+  jDRevision(-12, -2);
 
-  for (var i = 0; i < t.length ; i++){
-      combinations.push(data_to_combination(t[i]))
-      jDRevision(Number(t[i][1]),100)
-  }
+  // for (var i = 0; i < t.length ; i++){
+  //     combinations.push(data_to_combination(t[i]))
+  //     jDRevision(Number(t[i][1]),100)
+  // }
 
-  console.log(combinations)
+  // console.log(combinations)
+
   //let dial = new Dial();
 
   //dial.move(combinations);
@@ -54,7 +56,6 @@ function data_to_combination(data_item){
   let clicks = Number(data_item[1]);
   return new Combination(direction,clicks);
 }
-
 function modFun(){
 
   let a = -12;
@@ -74,13 +75,10 @@ function modFun(){
 
 
 }
-
 function jMod(n, m)
 {
   return ((( n % m) + m) % m);
 }
-
-
 function jDivision(n,divisor)
 {
     let quotient = 0
@@ -119,38 +117,38 @@ function jDivision(n,divisor)
 
 }
 
+
 function jDRevision(a, b)
 {
-  let remainder = 0;
-  let quotient = 0;
-  let dividend = Math.abs(a);
-  let divisor = b;
+    let remainder = 0;
+    let quotient = 0;
+    let dividend = Math.abs(a);
+    let divisor = Math.abs(b);
 
-  if(divisor == 0)
-    return "division by 0"
+    if(divisor == 0)
+      return console.error("division by 0")
 
-    while(dividend > divisor)
-    {
-      dividend -= divisor;
-      quotient++
-    }
+      while(dividend >= divisor)
+      {
+        dividend -= divisor;
+        quotient++
+      }
 
-    if (a < 0)
-    {
-      quotient *= -1
-      remainder = dividend * -1
+      if(a < 0 && b > 0)
+      {
+          quotient *= -1
+          remainder = dividend
+      }else if (a > 0 && b < 0)
+      {
+          divisor *= -1
+          remainder = dividend
+      }else
+          remainder = dividend
 
-    }else
-      remainder = dividend
-
-  let meta = new Info(a,divisor,quotient,remainder);
-  meta.toString();
+      let meta = new Info(a,divisor,quotient,remainder);
+      meta.toString();
 
 }
-
-
-
-
 
 
 
