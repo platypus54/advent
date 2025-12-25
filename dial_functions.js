@@ -1,5 +1,6 @@
-let CLICKS_TO_RADIANS = (Math.PI / 50);
-let TWO_PI = 2 * Math.PI
+let TWO_PI = 2 * Math.PI;
+let CLICKS_TO_RADIANS = ( TWO_PI / 100);
+
 
 class Combination {
 
@@ -10,9 +11,7 @@ class Combination {
       this.isRight = true;
 
     this.clicks = n;
-    this.radians = CLICKS_TO_RADIANS * n;
   }
-
 }
 
 class Dial
@@ -20,38 +19,47 @@ class Dial
 
   constructor()
   {
-    this.start_position = Math.PI; // the starting position of the dial
+    this.start_position = 50; // the starting position of the dial
     this.position = 0; // the position of the dial as we apply rotations
     this.rotation_counter = 0; // counter to track the number of rotations we make
     this.safe_password = 0; // counter to track how many times we land on zero
   }
 
+
   move(combo)
   {
+    this.position = this.start_position;
+
+
     for (var i = 0; i < combo.length; i++) {
 
-      // need to update - think mod
       if(combo[i].isLeft)
-        this.position -= combo[i].radians;
+        tp = (this.position - combo[i].clicks);
+      else if (combo[i].isRight)
+        tp = (this.position + combo[i].clicks);
 
-      else if (combo[i].isRight) {
-        this.position += combo[i].radians;
-      }
+
+      if(tp < 0)
+          this.position = (tp + 100);
       else
-        console.log("not a proper ")
+          this.position = tp % 100;
 
-        console.log(this.position)
+      // error
+      if(this.position == 0)
+        {this.safe_password++;}
 
-        if(this.position == 0)
-          this.safe_password++;
+      this.rotation_counter++;
 
-        this.rotation_counter++;
-    }
+      //console.log(this.position , this.rotation_counter, combo[i].clicks);
   }
 
+  moveRevision(){
+    
+  }
+  
+}
     print_summay()
     {
        console.log(this.safe_password , this.rotation_counter);
     }
-
-}
+ }
