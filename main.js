@@ -135,15 +135,11 @@ function jDRevision(a, b)
       }
 
       if(a < 0 && b > 0)
-      {
           quotient *= -1
-          remainder = dividend
-      }else if (a > 0 && b < 0)
-      {
+      else if (a > 0 && b < 0)
           divisor *= -1
-          remainder = dividend
-      }else
-          remainder = dividend
+
+      remainder = dividend
 
       let meta = new Info(a,divisor,quotient,remainder);
       meta.toString();
