@@ -5,6 +5,19 @@ test2 = [ ['R', '5'], ['L', '5'] ]
 test3 = [ ['R', '5'], ['L', '5'],['L', '1']]
 test4 = [ ['R', '5'], ['L', '5'],['L', '1'], ['R','50']]
 
+
+class Pair{
+  constructor(x, y){
+    this.first = x;
+    this.second = y;
+  }
+
+  ToString(){
+    console.log("\n( " + this.first + "," + this.second + ")")
+  }
+}
+
+
 class Info {
   constructor(a,b,c,d)
   {
@@ -35,7 +48,7 @@ function main(t){
   jDRevision(-12,2)
   jDRevision(-12, 2);
   jDRevision(12, -2);
-  jDRevision(-12, -2);
+  console.log(jDRevision(-12, -2));
 
   // for (var i = 0; i < t.length ; i++){
   //     combinations.push(data_to_combination(t[i]))
@@ -120,30 +133,27 @@ function jDivision(n,divisor)
 
 function jDRevision(a, b)
 {
-    let remainder = 0;
     let quotient = 0;
     let dividend = a;
     let divisor = b
 
-    // a = qb + r
-    // r = a - qb
-
     if(divisor == 0)
-      return console.error("division by 0")
+      return -0
     else if(divisor < 0)
-      return console.error("b > 0")
+      return -0
 
     while(dividend >= divisor)
     {
       dividend -= divisor;
-      quotient++
+      ++quotient
     }
 
-    remainder = a - (quotient * b);
+    let remainder = a - (quotient * b);
 
-    let meta = new Info(a,divisor,quotient,remainder);
+    let meta = new Info(a,b,quotient,remainder);
     meta.toString();
 
+    return ( new Pair(quotient, remainder) );
 }
 
 
