@@ -122,30 +122,29 @@ function jDRevision(a, b)
 {
     let remainder = 0;
     let quotient = 0;
-    let dividend = Math.abs(a);
-    let divisor = Math.abs(b);
+    let dividend = a;
+    let divisor = b
+
+    // a = qb + r
+    // r = a - qb
 
     if(divisor == 0)
       return console.error("division by 0")
+    else if(divisor < 0)
+      return console.error("b > 0")
 
-      while(dividend >= divisor)
-      {
-        dividend -= divisor;
-        quotient++
-      }
+    while(dividend >= divisor)
+    {
+      dividend -= divisor;
+      quotient++
+    }
 
-      if(a < 0 && b > 0)
-          quotient *= -1
-      else if (a > 0 && b < 0)
-          divisor *= -1
+    remainder = a - (quotient * b);
 
-      remainder = dividend
-
-      let meta = new Info(a,divisor,quotient,remainder);
-      meta.toString();
+    let meta = new Info(a,divisor,quotient,remainder);
+    meta.toString();
 
 }
-
 
 
 main(cList);
