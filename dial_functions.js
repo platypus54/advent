@@ -4,7 +4,7 @@ class Combination {
     if(direction == 'L')
     {
       this.isLeft = true;
-      this.isLeft = false;
+      this.isRight = false;
     }
     else if (direction == 'R')
     {
@@ -13,11 +13,10 @@ class Combination {
     }
     else
       this.isRight = this.isLeft = false
-      
+
     this.clicks = n;
   }
 }
-
 
 class Dial
 {
@@ -28,24 +27,23 @@ class Dial
     this.rotation_counter = 0; // counter to track the number of rotations we make
     this.safe_password = 0; // counter to track how many times we land on zero
   }
-  move(combo){
+
+  move(c){
     this.position = this.start_position;
 
-    for (var i = 0; i < combo.length; i++){
+    for (var i = 0; i < c.length; i++){
 
-      let a = 0;
-      if(combo[i].isLeft)
-        a = combo[i].clicks * -1;
+      let nPair = new Pair();
+      if(c[i].isLeft)
+        nPair = jDivision(c[i].clicks * -1 , 100)
       else
-        a = combo[i].clicks;
-
-      let nPair = jDivision(a , 100)
+        nPair = jDivision(c[i].clicks , 100)
 
       this.safe_password += nPair.item1
 
       let n = 0;
       while(n++ < Math.abs(nPair.item2)){
-        if(a < 0)
+        if(c[i].isLeft)
           this.position = jMod(this.position - 1, 100)
         else
           this.position = jMod(this.position + 1, 100)
