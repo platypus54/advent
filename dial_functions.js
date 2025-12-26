@@ -1,22 +1,17 @@
-let TWO_PI = 2 * Math.PI;
-let CLICKS_TO_RADIANS = ( TWO_PI / 100);
-
 
 class Combination {
-
-  constructor(direction, n) {
+  constructor(direction, n){
     if(direction == 'L')
       this.isLeft = true;
     else if (direction == 'R')
       this.isRight = true;
-
     this.clicks = n;
   }
 }
 
+
 class Dial
 {
-
   constructor()
   {
     this.start_position = 50; // the starting position of the dial
@@ -24,42 +19,38 @@ class Dial
     this.rotation_counter = 0; // counter to track the number of rotations we make
     this.safe_password = 0; // counter to track how many times we land on zero
   }
-
-
-  move(combo)
-  {
+  move(combo){
     this.position = this.start_position;
 
+    for (var i = 0; i < combo.length; i++){
 
-    for (var i = 0; i < combo.length; i++) {
-
+      let a = 0;
       if(combo[i].isLeft)
-        tp = (this.position - combo[i].clicks);
-      else if (combo[i].isRight)
-        tp = (this.position + combo[i].clicks);
-
-
-      if(tp < 0)
-          this.position = (tp + 100);
+        a = combo[i].clicks * -1;
       else
-          this.position = tp % 100;
+        a = combo[i].clicks;
 
-      // error
-      if(this.position == 0)
-        {this.safe_password++;}
+      let nPair = jDivision(a , 100)
 
-      this.rotation_counter++;
+      this.safe_password += nPair.item1
 
-      //console.log(this.position , this.rotation_counter, combo[i].clicks);
-  }
+      let n = 0;
+      while(n++ < Math.abs(nPair.item2)){
+        if(a < 0)
+          this.position = jMod(this.position - 1, 100)
+        else
+          this.position = jMod(this.position + 1, 100)
 
-  moveRevision(){
-    
-  }
-  
-}
-    print_summay()
-    {
-       console.log(this.safe_password , this.rotation_counter);
-    }
+          if(this.position == 0)
+            this.safe_password++;
+      }
+   }
+    return this.safe_password;
  }
+
+  print_summay(){
+     console.log(this.safe_password , this.rotation_counter);
+  }
+
+
+}
