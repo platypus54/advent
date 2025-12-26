@@ -1,19 +1,24 @@
-console.log(cList[0])
-
 test1 = [ ['L' , '3'],['R','39'],['R','45'],['R', '43']]
 test2 = [ ['R', '5'], ['L', '5'] ]
 test3 = [ ['R', '5'], ['L', '5'],['L', '1']]
 test4 = [ ['R', '5'], ['L', '5'],['L', '1'], ['R','50']]
 
-
 class Pair{
+
   constructor(x, y){
-    this.first = x;
-    this.second = y;
+    this._item1 = Number(x);
+    this._item2 = Number(y);
+  }
+  get item1(){return this._item1;};
+  get item2(){return this._item2;};
+
+  fromPair(pair_to_copy){
+    this.item1  = pair_to_copy._item1;
+    this.item2 = pair_to_copy._item1;
   }
 
   ToString(){
-    console.log("\n( " + this.first + "," + this.second + ")")
+    console.log("\n( " + this._item1 + "," + this._item2 + ")")
   }
 }
 
@@ -50,11 +55,13 @@ function main(t){
       console.log(jDivision(Number(t[i][1]),100))
    }
 
-  //let dial = new Dial();
+  let dial = new Dial();
 
-  //dial.move(combinations);
+  console.log(dial.move(combinations));
 
-  //dial.print_summay();
+  dial.print_summay();
+
+  console.log(jMod(-30,100));
 }
 
 function data_to_combination(data_item){
@@ -102,43 +109,13 @@ function jDivision(a, b){
 
     let remainder = a - (quotient * b);
 
-    return ( new Pair(quotient, remainder) );
+    let p = new Pair(quotient,remainder);
+
+   //let meta = new Info(a,divisor,quotient,remainder);
+   //meta.toString();
+
+    return p;
 }
-
-
-function adventClicks(a, b)
-{
-    let quotient = 0;
-    let dividend = a;
-    let divisor = b
-
-    if(divisor == 0)
-      return -0
-    else if(divisor < 0)
-      return -0
-
-    while(dividend >= divisor)
-    {
-      dividend -= divisor;
-      ++quotient
-    }
-
-    let remainder = a - (quotient * b);
-
-    return ( new Pair(quotient, remainder) );
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
