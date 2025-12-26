@@ -2,9 +2,18 @@
 class Combination {
   constructor(direction, n){
     if(direction == 'L')
+    {
       this.isLeft = true;
+      this.isLeft = false;
+    }
     else if (direction == 'R')
+    {
       this.isRight = true;
+      this.isLeft = false;
+    }
+    else
+      this.isRight = this.isLeft = false
+      
     this.clicks = n;
   }
 }
