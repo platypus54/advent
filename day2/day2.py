@@ -18,20 +18,13 @@ if __name__ == '__main__':
 
     print(numbers)
 
-    str_num = numbers[16] # 11
-    str_num_length = len(str_num)
-
     counter = 0
-    digit = 0
-    current_digit = ''
-    cursor = 0
-
-    print("number",str_num, "length", str_num_length)
-
+    validIDs = []
+    invalidIDs = []
     for x in numbers:
+
         n = len(x)
         if n % 2 == 0:
-
             minl = 0
             maxl = int(n / 2)
             minr = int(n / 2)
@@ -40,10 +33,10 @@ if __name__ == '__main__':
             print(x[minl:maxl], " =  ", x[minr:maxr], " -  ", int(n / 2))
 
             if x[minl:maxl] in x[minr:maxr]:
+                invalidIDs.append(x)
                 counter += 1;
         else:
-            print("validID",x )
-
-
+            validIDs.append(x)
 
     print(counter)
+    print(invalidIDs)
