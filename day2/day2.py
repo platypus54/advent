@@ -46,7 +46,7 @@ if __name__ == '__main__':
                 
                 print(y[minl:maxl], " =  ", y[minr:maxr])
 
-                if y[minl:maxl] in y[minr:maxr]:
+                if y[minl:maxl] == y[minr:maxr]:
                     invalidIDs.append(y)
                     sum += int(y)
                 else:
