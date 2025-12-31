@@ -3,7 +3,7 @@ import re
 if __name__ == '__main__':
     r = []
 
-    with open("/Users/zen/Desktop/advent/advent_2025/day2/day2TestData.txt") as lines:
+    with open("/../day2TestData.txt") as lines:
         for line in lines:
             n1 = re.split(r',', line)
             min = 0
