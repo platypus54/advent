@@ -27,18 +27,23 @@ if __name__ == '__main__':
     validIDs = []
     invalidIDs = []
 
+    #could clean this up.. len(y) * len(x) * ?(possible 'in')
     for x in r:
         print(x)
 
         for y in x:
             print(y)
             n = len(y)
-
+            # even or odd- that is the question
             if n % 2 == 0:
+               
+                # [minl,maxl)  and [minr, maxr) ; let n be the length of the string 
                 minl = 0
-                maxl = int(n / 2)
+                maxl = int(n / 2) 
+                
                 minr = int(n / 2)
                 maxr = n
+                
                 print(y[minl:maxl], " =  ", y[minr:maxr])
 
                 if y[minl:maxl] in y[minr:maxr]:
@@ -46,6 +51,7 @@ if __name__ == '__main__':
                     sum += int(y)
                 else:
                     validIDs.append(y)
-
+            else:
+                validIDs.append(y)
 
         print(f'Sum of invalid IDs: {sum} \n InvalidIDs:{invalidIDs} \n ValidIDs:{validIDs} \n')
