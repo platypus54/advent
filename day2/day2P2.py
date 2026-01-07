@@ -1,52 +1,95 @@
 import re
+import math
+
+def findMatchingSequence(g):
+    sequenceLeft = str()
+    positionLeftSequence = 0
+    sequenceRight = str()
+    positionRightSequence = 0
+
+    pSequence = str()
+    partitions = 0
+    sequence_size = 0
+    id = g
+    idSize = len(g)
+
+    sequenceLeft += id[positionLeftSequence]
+    while (positionLeftSequence < idSize - 1):
+
+        sequenceLeftSize = len(sequenceLeft)
+        positionRightSequence = positionLeftSequence + 1
+
+        while positionRightSequence < idSize:
+            sequenceRight += id[positionRightSequence]
+            positionRightSequence += 1
+
+        print(sequenceLeft, " | ", sequenceRight)
+
+        partitions = math.floor(len(sequenceRight) / sequenceLeftSize)
+        residual = len(sequenceRight) - partitions * sequenceLeftSize
+
+        positionRightSequence = 0
+
+        k = 0
+        repeated = 0
+        while (k < partitions):
+
+            while sequence_size < sequenceLeftSize:
+
+                pSequence += sequenceRight[positionRightSequence]
+                sequence_size += 1
+                positionRightSequence += 1
+
+                #print(pSequence, '\tpartitions: ', k)
+
+            if sequenceLeft == pSequence:
+                print(sequenceLeft, " == ", pSequence)
+                repeated += 1
+
+            pSequence = str()
+            sequence_size = 0
+            k += 1
+
+        if repeated >= 1 and repeated == partitions:
+
+            if(residual == 0):
+                return True
+
+        positionLeftSequence += 1
+        sequenceLeft += id[positionLeftSequence]
+
+        sequenceRight = str()
+
+    return False
+
 
 if __name__ == '__main__':
+
     r = []
-
-    with open("/../day2TestData.txt") as lines:
-        for line in lines:
-            n1 = re.split(r',', line)
-            min = 0
-            max = 0
-            for item in n1:
-                n2 = re.split(r'-', item, 1)
-                #print(n2)
-                min = int(n2[0])
-                max = int(n2[1])
-
-                temp = []
-                while (min <= max):
-                    temp.append(str(min))
-                    min+=1
-
-                #print(temp)
-                r.append(temp)
-
-    #print(r)
     sum_invalidIDs = 0
     validIDs = []
     invalidIDs = []
 
-    for x in r:
-        #print(x)
+    with open(".../t2.txt") as lines:
+        for line in lines:
+            n1 = re.split(r',', line)
 
-        for y in x:
-            #print(y)
-            n = len(y)
+            for item in n1:
+                n2 = re.split(r'-', item, 1)
 
-            for i in range(0, n - 1):
-                minl = 0
-                maxl = i + 1
-                minr = i + 1
-                maxr = n
+                min_id = int(n2[0])
+                max_id = int(n2[1])
 
-                if y[minl:maxl] == y[minr:maxr]:
-                    invalidIDs.append(y)
-                    sum_invalidIDs += int(y)
-                    print(y[minl:maxl], " =  ", y[minr:maxr])
-                else:
-                    validIDs.append(y)
+                while min_id <= max_id:
+                    print("NUMBER\t\t",min_id)
+                    id = str(min_id)
+                    if findMatchingSequence(id):
+                        sum_invalidIDs += int(id)
+                        invalidIDs.append(id)
+                    else:
+                        validIDs.append(id)
+
+                    min_id += 1
 
 
-
-    print(f'Sum of invalid IDs: {sum_invalidIDs} \n InvalidIDs:{invalidIDs} \n ValidIDs:{len(validIDs)} \n')
+print("sum", sum_invalidIDs, "invalid_IDs:\n" , invalidIDs)
