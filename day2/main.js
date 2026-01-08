@@ -1,60 +1,48 @@
-let nList = ['11','123123123']
-class Pair{
-
-  constructor(x, y){
-    this._item1 = Number(x);
-    this._item2 = Number(y);
-  }
-
-  get item1(){return this._item1;};
-  get item2(){return this._item2;};
-
-  fromPair(pair_to_copy){
-    this.item1  = pair_to_copy._item1;
-    this.item2 = pair_to_copy._item1;
-  }
-
-  ToString(){
-    console.log("\n( " + this._item1 + "," + this._item2 + ")")
-  }
-}
-
-
-
+let nList = ['101','123123123']
 
 main()
 
+function main()
+{
+    g('101')
+}
 
+function g(strNumber)
+{
 
-function main(){
-  let id = nList[1];
-  let idSize = nList[1].length;
+  if(!strNumber)
+    return false;
+
+  let id = strNumber;
+  let idSize = strNumber.length;
+
+  if(idSize == 1)
+    return true
 
   console.log(id)
   console.log(idSize)
 
-  n = idSize - 1 // size decreases
+  n = idSize // size decreases
   x = 1; // how many groups - increases (right side)
   i = 0
   sl = ''
   sr = ''
 
-  while(n / x > 0)
+  while(n / x > 0 && n > x)
   {
       p = Math.floor( n / x )
       r = n - p * x
-
       console.log('size', n, 'groups',x, 'residuals', r, 'partitions', p )
+
 
       sl += id[i]
       size = 0
-
       j = i + 1
       k = p * n * x
+      y = 0
 
-      console.log(k)
-      // creates the right sequence
-      while(p > 0 && j <= k)
+      console.log(p,k)
+      while(p > 0 && j < k )
       {
           if( size < x )
           {
@@ -63,28 +51,25 @@ function main(){
           }
           else
           {
-            console.log('SEQ:', sl ,'|', sr)
-            sr = String()
-            p--
-            size = 0
+            console.log('SEQ:', sl ,'==', sr)
 
+
+              sr = String()
+              p--
+              size = 0
           }
-      }
+        }
 
-      i++
-      n--
-      x++
+      console.log(p)
 
+      if(p == 0 && y >= 1)
+        return true
 
+      i++;  n--;  x++;
   }
 
-
-  console.log(get_matches(id))
-  console.log(get_sequences(id))
-  console.log(generate_partitions(get_matches(id), get_sequences(id)))
-
+  return false;
 }
-
 
 function generate_partitions(matches, sequences){
   p = []
@@ -98,7 +83,6 @@ function generate_partitions(matches, sequences){
   return p
 }
 
-
 function get_matches(str){
   matches = []
   seq = ''
@@ -108,7 +92,6 @@ function get_matches(str){
   }
   return matches
 }
-
 
 function get_sequences(str){
   sequences = [ ]
@@ -120,16 +103,12 @@ function get_sequences(str){
 
     sequences[i - 1] = seq
   }
-
   return sequences
 }
 
 
-
-//--------//
-
-function k(){
-
+function k()
+{
     let sequenceLeft = String();
     let positionLeftSequence = 0;
 
