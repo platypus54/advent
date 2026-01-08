@@ -1,4 +1,4 @@
-let nList = ['101','123123123']
+let nList = ['11','123123123']
 class Pair{
 
   constructor(x, y){
@@ -27,49 +27,60 @@ main()
 
 
 function main(){
-  let id = nList[0];
-  let idSize = nList[0].length;
+  let id = nList[1];
+  let idSize = nList[1].length;
 
   console.log(id)
   console.log(idSize)
 
-  n = idSize // size decreases
-  x = 0; // how many groups - increases (right side)
+  n = idSize - 1 // size decreases
+  x = 1; // how many groups - increases (right side)
+  i = 0
+  sl = ''
+  sr = ''
 
-  while( n-- / x++ > 0)
+  while(n / x > 0)
   {
-    console.log('groups',x, 'residuals', n % x, 'partitions', Math.floor(n / x) )
+      p = Math.floor( n / x )
+      r = n - p * x
 
-      if(n % x > 0)
-        break
+      console.log('size', n, 'groups',x, 'residuals', r, 'partitions', p )
 
-      i = 0
-      r = 0
-      pos = 0
+      sl += id[i]
+      size = 0
 
-      sl = ''
-      sr = ''
-      while(i < idSize)
+      j = i + 1
+      k = p * n * x
+
+      console.log(k)
+      // creates the right sequence
+      while(p > 0 && j <= k)
       {
-          sl += id[i++]
-
-          size = 0
-          j = 0
-          while(j++ < idSize && size++ < x)
+          if( size < x )
+          {
             sr += id[j++]
-            console.log('SEQL:', sl )
+            size++
+          }
+          else
+          {
+            console.log('SEQ:', sl ,'|', sr)
+            sr = String()
+            p--
+            size = 0
+
+          }
       }
 
+      i++
+      n--
+      x++
+
+
   }
 
-  function gP(seq, start, end)
-  {
-
-  }
 
   console.log(get_matches(id))
   console.log(get_sequences(id))
-
   console.log(generate_partitions(get_matches(id), get_sequences(id)))
 
 }
