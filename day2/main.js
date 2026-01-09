@@ -1,191 +1,129 @@
 let nList = ['101','123123123']
 
-main()
+main(nList)
 
-function main()
+function main(k)
 {
-    g('101')
+  sumnum = 0;
+  for (var i = 0; i < k.length; i++) {
+    if( g(k[i]) )
+      sumnum += Number(k[i])
+  }
+  console.log(sumnum)
 }
 
 function g(strNumber)
 {
 
-  if(!strNumber)
+  if(!strNumber )
     return false;
 
-  let id = strNumber;
   let idSize = strNumber.length;
 
   if(idSize == 1)
     return true
 
-  console.log(id)
-  console.log(idSize)
+  document.write('<div>')
+  document.write('<h1> NUMBER:\t', strNumber, '</h1>')
 
-  n = idSize // size decreases
+
+  n = idSize - 1 // size decreases
   x = 1; // how many groups - increases (right side)
   i = 0
   sl = ''
-  sr = ''
 
-  while(n / x > 0 && n > x)
+  while(n / x > 0)
   {
+
       p = Math.floor( n / x )
       r = n - p * x
-      console.log('size', n, 'groups',x, 'residuals', r, 'partitions', p )
-
-
-      sl += id[i]
+      sl += strNumber[i]
+      sr = ''
       size = 0
       j = i + 1
-      k = p * n * x
+      k = p * n
       y = 0
 
-      console.log(p,k)
-      while(p > 0 && j < k )
+      document.writeln('<table>',
+
+                         '<tr>',
+                         '<th> left: </th>',
+                         '<td>', sl, '</td>',
+                         '<th> left size: </th>',
+                         '<td>', idSize - n, '</td>',
+                         '</tr>',
+
+                         '<th> groups: </th>',
+                         '<td>', x, '</td>',
+
+                         '<th> partitions: </th>',
+                         '<td>', p, '</td>',
+
+                         '<th> residuals: </th>',
+                         '<td>', r, '</td>'
+                      )
+
+
+
+      while(p > 0 && j < k)
       {
-          if( size < x )
+          if(size < x)
           {
-            sr += id[j++]
+            sr += strNumber[j++]
             size++
           }
           else
           {
             console.log('SEQ:', sl ,'==', sr)
 
+            if(sl == sr)
+              y++
 
-              sr = String()
-              p--
-              size = 0
+            document.writeln(
+
+                               '<tr>',
+                               '<th> left: </th>',
+                               '<td>', sl, '</td>',
+                               '<th> right: </th>',
+                               '<td>', sr, '</td>',
+                               '<th> match: </th>',
+                               '<td>', sl == sr , '</td>',
+                               '</tr>'
+                      )
+
+
+            p--
+            sr = String()
+            size = 0
           }
-        }
+      }
+      document.write(
+                                  '<tr>',
+                                  '<th> final p: </th>',
+                                  '<td>', p, '</td>',
 
-      console.log(p)
+                                  '<th> y: </th>',
+                                  '<td>', y, '</td>',
 
-      if(p == 0 && y >= 1)
+                                  '<th> x: </th>',
+                                  '<td>', x, '</td>',
+
+                                  '<th> P: </th>',
+                                  '<td>', Math.floor(n  / x), '</td>',
+
+                                  '<th> P: </th>',
+                                  '<td>', y > 1 && y == Math.floor(n  / x), '</td>',
+
+                                  '</tr>',
+                                  '</table><br>'
+
+      )
+
+      if( y > 1 && y == Math.floor(n  / x) )
         return true
 
       i++;  n--;  x++;
   }
-
+  document.writeln('</div>')
   return false;
-}
-
-function generate_partitions(matches, sequences){
-  p = []
-  for (var i = 0; i < sequences.length - 1; i++) {
-
-    partitions = Math.floor( sequences[i + 1].length / matches[i].length)
-    residual = sequences[ i + 1 ].length - partitions * matches[i].length
-
-      p[i] = new Pair(partitions,residual)
-  }
-  return p
-}
-
-function get_matches(str){
-  matches = []
-  seq = ''
-  for (var i = 0, n = 0; i < str.length - 1; i++) {
-      seq += str[i]
-      matches[i] = seq
-  }
-  return matches
-}
-
-function get_sequences(str){
-  sequences = [ ]
-
-  for (var i = 1; i < str.length; i++) {
-
-      for(var n = 0; n < str.length; n++)
-        seq += str[i]
-
-    sequences[i - 1] = seq
-  }
-  return sequences
-}
-
-
-function k()
-{
-    let sequenceLeft = String();
-    let positionLeftSequence = 0;
-
-    let sequenceRight = String();
-    let positionRightSequence = 0;
-
-    let pSequence = String();
-    let partitions = 0;
-    let sequence_size = 0;
-
-    let id = nList[0];
-    let idSize = nList[0].length
-
-    sequenceLeft += id[positionLeftSequence];
-
-    while(positionLeftSequence < idSize){
-        console.log("A:PLSEQ", positionLeftSequence, "PLREQ", positionRightSequence)
-
-        let sequenceLeftSize = sequenceLeft.length;
-        positionRightSequence = positionLeftSequence + 1
-
-        console.log("B:PLSEQ", positionLeftSequence, "PLREQ ", positionRightSequence)
-
-          while(positionRightSequence < idSize )
-          {
-            sequenceRight += id[positionRightSequence++];
-            //console.log(sequenceRight)
-            console.log("C:RSEQ ", sequenceRight, "PLREQ ", positionRightSequence)
-          }
-
-          console.log(sequenceLeft, " | ", sequenceRight)
-
-          partitions = Math.floor( sequenceRight.length / sequenceLeftSize )
-
-          positionRightSequence  = 0
-
-          k = 0
-          match = 1;
-
-          while(k < partitions)
-          {
-              console.log("D: PARTITION ", k, "PRSEQ", positionRightSequence)
-
-              while(sequence_size < sequenceLeftSize)
-              {
-                console.log("E: SEQS ", sequence_size , "PRSEQ", positionRightSequence)
-                console.log(sequenceRight[positionRightSequence])
-
-                pSequence += sequenceRight[positionRightSequence]
-
-                console.log(pSequence)
-
-                sequence_size++
-                positionRightSequence++
-              }
-              console.log("partition:", pSequence,'\tpartitions: ', k)
-
-
-
-              if(sequenceLeft === pSequence){
-                  match++;
-                  console.log(sequenceLeft, " == ", pSequence)
-              }
-
-              pSequence = String()
-              sequence_size = 0
-              k++
-
-          }
-
-          if(match > 1)
-              console.log("INVALID ID")
-
-        positionLeftSequence++
-
-        sequenceLeft += id[positionLeftSequence]
-
-        sequenceRight = String()
-    }
 }
