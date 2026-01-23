@@ -1,15 +1,90 @@
-let nList = ['101','123123123']
+let strnList = ['101','123123123']
 
-main(nList)
+class Pair{
+
+  constructor(x, y){
+    this._item1 = Number(x);
+    this._item2 = Number(y);
+  }
+
+  get item1(){return this._item1;};
+  get item2(){return this._item2;};
+
+  fromPair(pair_to_copy){
+    this.item1  = pair_to_copy._item1;
+    this.item2 = pair_to_copy._item1;
+  }
+
+  ToString(){
+    console.log("\n( " + this._item1 + "," + this._item2 + ")")
+  }
+}
+
+
+
+main(strnList)
+
+class seq{
+
+}
+
+
+function WOP(list){
+
+}
+
+function seq_func(number){
+  return number;
+}
+
+function find_term(number, m = 0, n){
+
+  term = 0
+  while(m < number.length && m < n)
+  {
+    console.log(number[m])
+    term += number[m++];
+
+  }
+
+  return term
+}
+
 
 function main(k)
 {
-  sumnum = 0;
-  for (var i = 0; i < k.length; i++) {
-    if( g(k[i]) )
-      sumnum += Number(k[i])
+
+  aList = [1,2,3,1,2,3]
+  n = aList.length
+
+  i = 0
+  k = 1
+
+  sum = 0
+  match = 0
+  g = 1;
+  t = ''
+  while(i < n, k < n){
+
+    match = find_term(aList, i , k) * Math.floor(n / (n - k))
+    q = find_term(aList, k, n)
+    t += aList[i]
+
+    console.log(t, i++, k++,)
+    console.log(match, q, match == q, match < q, match > q)
   }
-  console.log(sumnum)
+
+  posList = []
+  pList = []
+  bList = []
+
+
+
+
+
+
+  console.log(aList, pList,posList, bList)
+
 }
 
 function g(strNumber)
@@ -23,107 +98,35 @@ function g(strNumber)
   if(idSize == 1)
     return true
 
-  document.write('<div>')
-  document.write('<h1> NUMBER:\t', strNumber, '</h1>')
-
-
   n = idSize - 1 // size decreases
   x = 1; // how many groups - increases (right side)
   i = 0
   sl = ''
 
-  while(n / x > 0)
+  let perms = []
+  while(Math.floor(n-- / x++) > 0)
+  {
+    perms.push( Math.floor(n / x))
+  }
+
+  sizeofRightPositions = []
+  sizeofLeftPositions = []
+
+  i = 0;
+
+  while(i < idSize)
   {
 
-      p = Math.floor( n / x )
-      r = n - p * x
-      sl += strNumber[i]
-      sr = ''
-      size = 0
-      j = i + 1
-      k = p * n
-      y = 0
+    sizeofLeftPositions.push(strNumber[i]);
 
-      document.writeln('<table>',
+    if(i + 1 < idSize)
+      sizeofRightPositions.push(strNumber[i + 1]);
 
-                         '<tr>',
-                         '<th> left: </th>',
-                         '<td>', sl, '</td>',
-                         '<th> left size: </th>',
-                         '<td>', idSize - n, '</td>',
-                         '</tr>',
-
-                         '<th> groups: </th>',
-                         '<td>', x, '</td>',
-
-                         '<th> partitions: </th>',
-                         '<td>', p, '</td>',
-
-                         '<th> residuals: </th>',
-                         '<td>', r, '</td>'
-                      )
-
-
-
-      while(p > 0 && j < k)
-      {
-          if(size < x)
-          {
-            sr += strNumber[j++]
-            size++
-          }
-          else
-          {
-            console.log('SEQ:', sl ,'==', sr)
-
-            if(sl == sr)
-              y++
-
-            document.writeln(
-
-                               '<tr>',
-                               '<th> left: </th>',
-                               '<td>', sl, '</td>',
-                               '<th> right: </th>',
-                               '<td>', sr, '</td>',
-                               '<th> match: </th>',
-                               '<td>', sl == sr , '</td>',
-                               '</tr>'
-                      )
-
-
-            p--
-            sr = String()
-            size = 0
-          }
-      }
-      document.write(
-                                  '<tr>',
-                                  '<th> final p: </th>',
-                                  '<td>', p, '</td>',
-
-                                  '<th> y: </th>',
-                                  '<td>', y, '</td>',
-
-                                  '<th> x: </th>',
-                                  '<td>', x, '</td>',
-
-                                  '<th> P: </th>',
-                                  '<td>', Math.floor(n  / x), '</td>',
-
-                                  '<th> P: </th>',
-                                  '<td>', y > 1 && y == Math.floor(n  / x), '</td>',
-
-                                  '</tr>',
-                                  '</table><br>'
-
-      )
-
-      if( y > 1 && y == Math.floor(n  / x) )
-        return true
-
-      i++;  n--;  x++;
+    i++
   }
-  document.writeln('</div>')
-  return false;
+
+
+
+  console.log(perms)
+  console.log(sizeofLeftPositions, sizeofRightPositions)
 }
