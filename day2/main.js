@@ -1,4 +1,4 @@
-let strnList = ['101','123123123']
+let strnList = [ [1,2,3], [0,1,2], [1,1,0,1,0], [1,1,1] ]
 
 class Pair{
 
@@ -40,84 +40,44 @@ function find_term(number, m = 0, n){
   return term
 }
 
+function find_match(id){
+  if(id[0] == 0)
+    return 0
+
+  n = id.length
+  i = 0
+  k = 0
+  m = 0
+  match = ''
+
+  while(i < n)
+    {
+      match += id[i]
+      sizeLeft = i + m
+      sizeRight = n - k
+      a = find_term(id, 0, i + m)
+      b = find_term(id, k + 1, n)
+
+      p = ( (n - k) - 1 )  / ( (i + m) + 1)
+      r = ( (n - k) - 1 )  % ( (i + m) + 1)
+
+      console.log(p,sizeLeft, sizeRight, a, b)
+
+      if(p - r > 1 && p * a == b){
+        console.log("MATCH")
+        console.log(match,p,sizeLeft, sizeRight, a, b)
+      }
+      i++
+      k++
+    }
+    console.log(p)
+}
 
 function main(k)
 {
 
-  aList = [1,2,3,1,2,3]
-  n = aList.length
-  lSubs = []
-  rSubs = []
-
-  i = 0
-  k = 0
-  m = 0
-
-  match = 0
-  t = ''
-
-  //console.log(find_term(aList,0, n))
-  while(i < n)
-  {
-    sizeLeft = i + m
-    sizeRight = n - k
-    a = find_term(aList, 0, i + m)
-    b = find_term(aList, k + 1, n)
-
-    p = ( (n - k) - 1 )  / ( (i + m) + 1)
-
-    if(p >= 1 && p * a == b){
-      console.log("MATCH")
-      console.log(p,sizeLeft, sizeRight, a, b)
-    }
-    i++
-    k++
-  }
-  console.log(p)
-
-}
-
-
-function g(strNumber)
-{
-
-  if(!strNumber )
-    return false;
-
-  let idSize = strNumber.length;
-
-  if(idSize == 1)
-    return true
-
-  n = idSize - 1 // size decreases
-  x = 1; // how many groups - increases (right side)
-  i = 0
-  sl = ''
-
-  let perms = []
-  while(Math.floor(n-- / x++) > 0)
-  {
-    perms.push( Math.floor(n / x))
+  for (var i = 0; i < k.length; i++) {
+    find_match(k[i])
   }
 
-  sizeofRightPositions = []
-  sizeofLeftPositions = []
-
-  i = 0;
-
-  while(i < idSize)
-  {
-
-    sizeofLeftPositions.push(strNumber[i]);
-
-    if(i + 1 < idSize)
-      sizeofRightPositions.push(strNumber[i + 1]);
-
-    i++
-  }
-
-
-
-  console.log(perms)
-  console.log(sizeofLeftPositions, sizeofRightPositions)
 }
