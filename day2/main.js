@@ -24,27 +24,17 @@ class Pair{
 
 main(strnList)
 
-class seq{
-
-}
-
-
-function WOP(list){
-
-}
-
-function seq_func(number){
-  return number;
-}
 
 function find_term(number, m = 0, n){
 
-  term = 0
-  while(m < number.length && m < n)
-  {
-    console.log(number[m])
-    term += number[m++];
+  if(m > n)
+    return 0
 
+  term = 0
+  while(m < number.length && m <= n)
+  {
+    term += number[m];
+    m++
   }
 
   return term
@@ -56,36 +46,37 @@ function main(k)
 
   aList = [1,2,3,1,2,3]
   n = aList.length
+  lSubs = []
+  rSubs = []
 
   i = 0
-  k = 1
+  k = 0
+  m = 0
 
-  sum = 0
   match = 0
-  g = 1;
   t = ''
-  while(i < n, k < n){
 
-    match = find_term(aList, i , k) * Math.floor(n / (n - k))
-    q = find_term(aList, k, n)
-    t += aList[i]
+  //console.log(find_term(aList,0, n))
+  while(i < n)
+  {
+    sizeLeft = i + m
+    sizeRight = n - k
+    a = find_term(aList, 0, i + m)
+    b = find_term(aList, k + 1, n)
 
-    console.log(t, i++, k++,)
-    console.log(match, q, match == q, match < q, match > q)
+    p = ( (n - k) - 1 )  / ( (i + m) + 1)
+
+    if(p >= 1 && p * a == b){
+      console.log("MATCH")
+      console.log(p,sizeLeft, sizeRight, a, b)
+    }
+    i++
+    k++
   }
-
-  posList = []
-  pList = []
-  bList = []
-
-
-
-
-
-
-  console.log(aList, pList,posList, bList)
+  console.log(p)
 
 }
+
 
 function g(strNumber)
 {
