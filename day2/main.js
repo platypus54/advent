@@ -1,4 +1,4 @@
-let strnList = [ [1,2,3], [0,1,2], [1,1,0,1,0], [1,1,1] ]
+let strnList = [ [1,2,3], [0,1,2], [1,1,0,1,0], [1,1,1], [5,3,7,9], [2,1,3,2,1], [9,9,9,9] ]
 
 class Pair{
 
@@ -53,24 +53,23 @@ function find_match(id){
   while(i < n)
     {
       match += id[i]
-      sizeLeft = i + m
-      sizeRight = n - k
-      a = find_term(id, 0, i + m)
+      xL = i + m
+      xR = n - k
+      a = find_term(id, 0, xL)
       b = find_term(id, k + 1, n)
+      p = ( (xR) - 1 )  / ( (xL) + 1)
+      r = ( (xR) - 1 )  % ( (xL) + 1)
 
-      p = ( (n - k) - 1 )  / ( (i + m) + 1)
-      r = ( (n - k) - 1 )  % ( (i + m) + 1)
+      //console.log(p,xL, xR, a, b)
 
-      console.log(p,sizeLeft, sizeRight, a, b)
-
-      if(p - r > 1 && p * a == b){
+      if(p - r >= 1 && p * a == b){
         console.log("MATCH")
-        console.log(match,p,sizeLeft, sizeRight, a, b)
+        console.log(match,p,xL, xR, a, b)
+        break
       }
       i++
       k++
     }
-    console.log(p)
 }
 
 function main(k)
