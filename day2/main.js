@@ -62,7 +62,7 @@ function find_match(id){
 
       //console.log(p,xL, xR, a, b)
 
-      if(p - r >= 1 && p * a == b){
+      if(b > 0 && p * a == b){
         console.log("MATCH")
         console.log(match,p,xL, xR, a, b)
         break
