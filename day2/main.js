@@ -41,6 +41,7 @@ function find_term(number, m = 0, n){
 }
 
 function find_match(id){
+
   if(id[0] == 0)
     return 0
 
@@ -62,7 +63,8 @@ function find_match(id){
 
       //console.log(p,xL, xR, a, b)
 
-      if(b > 0 && p * a == b){
+      if(b > 0 && p * a == b)
+      {
         console.log("MATCH")
         console.log(match,p,xL, xR, a, b)
         break
@@ -72,11 +74,38 @@ function find_match(id){
     }
 }
 
+function find_length_of_number(n)
+{
+  k = n
+  while(k > 1)
+  {
+    k = k / 10
+    console.log(k)
+    i++
+  }
+
+  return i;
+}
+
+function generate_num(i, t)
+{
+
+  k = 0;
+  numbers = []
+  while(i <= t)
+  {
+
+  }
+
+}
+
 function main(k)
 {
 
   for (var i = 0; i < k.length; i++) {
     find_match(k[i])
   }
+
+  console.log(find_length_of_number(101))
 
 }
