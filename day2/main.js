@@ -21,9 +21,17 @@ class Pair{
 }
 
 
+main()
 
-main(strnList)
+function main()
+{
+  g = generate_num(11, 22)
+  for (var i = 0; i < g.length; i++) {
+    console.log(find_match(g[i]))
+  }
 
+  //console.log(generate_num(11, 22))
+}
 
 function find_term(number, m, n){
 
@@ -63,14 +71,15 @@ function find_match(id){
       {
         console.log("MATCH")
         console.log(match,p,xL, xR, a, b)
-        break
+        return true
       }
       i++
       k++
     }
+    return false
 }
 
-function find_length_of_number(n)
+function genNum(n)
 {
   k = n
   t = []
@@ -78,14 +87,12 @@ function find_length_of_number(n)
 
   while(k >= 1)
   {
-    r = k - k % 10
-
-    k = (k / 10)
-    //console.log(k, r, remainder)
-    t.push(r)
+    r = k % 10
+    k = k / 10
+    //console.log(k, r)
+    t.unshift(Math.floor(r))
     i++
   }
-
   return t;
 }
 
@@ -96,18 +103,7 @@ function generate_num(i, t)
   numbers = []
   while(i <= t)
   {
-
+    numbers.push(genNum(i++))
   }
-
-}
-
-function main(k)
-{
-
-  for (var i = 0; i < k.length; i++) {
-    find_match(k[i])
-  }
-
-  console.log(find_length_of_number(1223))
-
+  return numbers
 }
