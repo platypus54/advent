@@ -25,7 +25,7 @@ class Pair{
 main(strnList)
 
 
-function find_term(number, m = 0, n){
+function find_term(number, m, n){
 
   if(m > n)
     return 0
@@ -48,20 +48,16 @@ function find_match(id){
   n = id.length
   i = 0
   k = 0
-  m = 0
   match = ''
 
   while(i < n)
     {
       match += id[i]
-      xL = i + m
+      xL = i
       xR = n - k
       a = find_term(id, 0, xL)
       b = find_term(id, k + 1, n)
       p = ( (xR) - 1 )  / ( (xL) + 1)
-      r = ( (xR) - 1 )  % ( (xL) + 1)
-
-      //console.log(p,xL, xR, a, b)
 
       if(b > 0 && p * a == b)
       {
@@ -77,14 +73,20 @@ function find_match(id){
 function find_length_of_number(n)
 {
   k = n
-  while(k > 1)
+  t = []
+  i = 0;
+
+  while(k >= 1)
   {
-    k = k / 10
-    console.log(k)
+    r = k - k % 10
+
+    k = (k / 10)
+    //console.log(k, r, remainder)
+    t.push(r)
     i++
   }
 
-  return i;
+  return t;
 }
 
 function generate_num(i, t)
@@ -106,6 +108,6 @@ function main(k)
     find_match(k[i])
   }
 
-  console.log(find_length_of_number(101))
+  console.log(find_length_of_number(1223))
 
 }
