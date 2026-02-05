@@ -19,20 +19,9 @@ class Sequence{
       }
     }
       this.size = this.list.length
-      this.partitions = this.gen_partitions(this.size);
       this.left = [];
       this.right = [];
 
-  }
-
-  gen_partitions(n){
-    t = Array(n);
-
-    for(let m = 0; m < n; m++)
-    {
-      t[n - (m + 1) ] = new Pair(m + 1 ,n / (m + 1) )
-    }
-    return t
   }
 
   copy_s(list)
@@ -44,8 +33,8 @@ class Sequence{
     return t;
   }
 
-  copy_s_range(list,start,end){
-
+  copy_s_range(list,start,end)
+  {
     if(start > end)
       return []
 
@@ -53,11 +42,13 @@ class Sequence{
     for (var i = start, j = 0; i < list.length && i < end; i++, j++) {
       t[j] = list[i]
     }
-
     return t;
   }
 
   create_n_group_elements_from_set(item, groups,start){
+
+    if(groups == 0)
+      return []
 
     t = []
 
@@ -85,7 +76,6 @@ class Sequence{
 
   ToString()
   {
-
       let t = '{ '
       let i = 0
 
