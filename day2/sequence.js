@@ -49,7 +49,7 @@ class Sequence{
     if(start > end)
       return []
 
-    for (var i = start, j = 0; i < array.length && i < end; i++, j++) {
+    for (var i = start, j = 0; i < list.length && i < end; i++, j++) {
       t[j] = this.list[i]
     }
 
