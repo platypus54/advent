@@ -1,55 +1,24 @@
-let strnList = [ [1,2,3], [0,1,2], [1,1,0,1,0], [1,1,1], [5,3,7,9], [2,1,3,2,1], [9,9,9,9] ]
-
-class Pair{
-
-  constructor(x, y){
-    this._item1 = Number(x);
-    this._item2 = Number(y);
-  }
-
-  get item1(){return this._item1;};
-  get item2(){return this._item2;};
-
-  fromPair(pair_to_copy){
-    this.item1  = pair_to_copy._item1;
-    this.item2 = pair_to_copy._item1;
-  }
-
-  ToString(){
-    console.log("\n( " + this._item1 + "," + this._item2 + ")")
-  }
-}
-
-
 main()
-
 function main()
 {
-  g = generate_num(11, 22)
-  for (var i = 0; i < g.length; i++) {
+
+  g = generate_num(824824821,824824827)
+  s = 'hello'
+  let S = new Sequence(g[0])
+
+  S.showStats()
+
+
+  for (var i = 0; i < g.length; i++)
+  {
     console.log(find_match(g[i]))
   }
 
   //console.log(generate_num(11, 22))
 }
 
-function find_term(number, m, n){
-
-  if(m > n)
-    return 0
-
-  term = 0
-  while(m < number.length && m <= n)
-  {
-    term += number[m];
-    m++
-  }
-
-  return term
-}
-
-function find_match(id){
-
+function find_match(id)
+{
   if(id[0] == 0)
     return 0
 
@@ -60,21 +29,9 @@ function find_match(id){
 
   while(i < n)
     {
-      match += id[i]
-      xL = i
-      xR = n - k
-      a = find_term(id, 0, xL)
-      b = find_term(id, k + 1, n)
-      p = ( (xR) - 1 )  / ( (xL) + 1)
-
-      if(b > 0 && p * a == b)
-      {
-        console.log("MATCH")
-        console.log(match,p,xL, xR, a, b)
-        return true
-      }
       i++
       k++
+
     }
     return false
 }
@@ -83,15 +40,11 @@ function genNum(n)
 {
   k = n
   t = []
-  i = 0;
-
   while(k >= 1)
   {
     r = k % 10
     k = k / 10
-    //console.log(k, r)
     t.unshift(Math.floor(r))
-    i++
   }
   return t;
 }
@@ -106,4 +59,22 @@ function generate_num(i, t)
     numbers.push(genNum(i++))
   }
   return numbers
+}
+
+function find_term(number, m, n){
+
+  if(m > n)
+    return 0
+
+  term = 0
+  while(m < number.length && m <= n)
+  {
+      if(number[m] == 0)
+          break
+
+      term += number[m];
+      m++
+  }
+
+  return term
 }
