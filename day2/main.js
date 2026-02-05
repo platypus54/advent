@@ -3,18 +3,16 @@ function main()
 {
 
   g = generate_num(824824821,824824827)
+  console.log(g)
   s = 'hello'
-  let S = new Sequence(g[0])
 
-  S.showStats()
-
-
-  for (var i = 0; i < g.length; i++)
-  {
-    console.log(find_match(g[i]))
+  let t = []
+  for (var i = 0; i < g.length; i++) {
+    let k = new Sequence(g[i])
+    t[i] = k
   }
 
-  //console.log(generate_num(11, 22))
+  console.log(t)
 }
 
 function find_match(id)
