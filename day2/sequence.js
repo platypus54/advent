@@ -55,7 +55,16 @@ class Sequence{
     }
 
     return t;
+  }
 
+  create_n_group_elements_from_set(item, groups,start){
+
+    t = []
+
+    for (var i = start, m = 0; i < item.length; i += groups, m++) {
+      t[m] = this.copy_s_range(item,i, i + groups)
+    }
+    return t;
   }
 
   gen_left(){
