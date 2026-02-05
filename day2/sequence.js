@@ -1,4 +1,3 @@
-// "sequence"
 class Sequence{
 
   constructor(items){
@@ -46,11 +45,13 @@ class Sequence{
   }
 
   copy_s_range(list,start,end){
+
     if(start > end)
       return []
 
+    let t = [end - start]
     for (var i = start, j = 0; i < list.length && i < end; i++, j++) {
-      t[j] = this.list[i]
+      t[j] = list[i]
     }
 
     return t;
@@ -75,7 +76,8 @@ class Sequence{
 
   ToString()
   {
-      t = '{ '
+
+      let t = '{ '
       let i = 0
 
       for (; i < this.size - 1; i++)
