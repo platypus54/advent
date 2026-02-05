@@ -3,13 +3,13 @@ class Sequence{
   constructor(items){
 
     this.list = Array();
-
     if(Array.isArray(items))
     {
       for (var i = 0; i < items.length; i++)
       {
         this.list[i] = items[i]
       }
+          //console.log(this.list)
     }
     else if(typeof items == "string")
     {
@@ -19,16 +19,16 @@ class Sequence{
       }
     }
       this.size = this.list.length
-      this.left = [];
-      this.right = [];
+      this.left = this.gen_left()
+      this.right = this.gen_right()
 
   }
 
   copy_s(list)
   {
-    t = [this.size]
+    let t = [this.size]
     for (var i = 0; i < this.size; i++) {
-      t[i] = this.list[i];
+      t[i] = list[i];
     }
     return t;
   }
@@ -45,30 +45,40 @@ class Sequence{
     return t;
   }
 
-  create_n_group_elements_from_set(item, groups,start){
-
+  create_n_group_elements_from_set(item, groups,start)
+  {
     if(groups == 0)
       return []
 
-    t = []
-
-    for (var i = start, m = 0; i < item.length; i += groups, m++) {
+    let t = []
+    for (var i = start, m = 0; i < item.length ; i += groups, m++)
+    {
       t[m] = this.copy_s_range(item,i, i + groups)
     }
     return t;
   }
 
   gen_left(){
-
-
-    for (var i = 0; i < this.size; i++) {
-
-
-      for (var i = 0; i < this.length; i++) {
-        array[i]
-      }
+    let t = []
+    for (var i = 0; i < this.size; i++)
+    {
+      t[i] = this.copy_s_range(this.list, 0, i + 1)
     }
+
+    return t
   }
+
+  gen_right(){
+    let t = []
+    let g = 1
+    for (var i = 0; i < this.size - 1; i++)
+    {
+      t[i] = this.copy_s_range(this.list,i + 1, this.size)
+    }
+
+    return t
+  }
+
 
   showStats(){
     console.log(this.ToString(), "size:", this.size, "p: ", this.partitions)
