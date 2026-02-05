@@ -36,10 +36,36 @@ class Sequence{
     return t
   }
 
+  copy_s(list)
+  {
+    t = [this.size]
+    for (var i = 0; i < this.size; i++) {
+      t[i] = this.list[i];
+    }
+    return t;
+  }
+
+  copy_s_range(list,start,end){
+    if(start > end)
+      return []
+
+    for (var i = start, j = 0; i < array.length && i < end; i++, j++) {
+      t[j] = this.list[i]
+    }
+
+    return t;
+
+  }
 
   gen_left(){
+
+
     for (var i = 0; i < this.size; i++) {
-      this.list.[i]
+
+
+      for (var i = 0; i < this.length; i++) {
+        array[i]
+      }
     }
   }
 
