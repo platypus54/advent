@@ -18,15 +18,44 @@ class Sequence{
         this.list.push( items[i] )
       }
     }
+
       this.size = this.list.length
       this.left = this.gen_left()
       this.right = this.gen_right()
 
   }
 
+  equal(l,r){
+    if(l.length == r.length)
+
+      for (var i = 0; i < l.length; i++) {
+        if(l[i] != r[i])
+          return false
+
+      }else {
+        return false
+      }
+
+      return true
+  }
+
+  equal(r){
+    if(this.size == r.length)
+
+      for (var i = 0; i < this.size; i++) {
+        if(this.list[i] != r[i])
+          return false
+
+      }else {
+        return false
+      }
+
+      return true
+  }
+
   copy_s(list)
   {
-    let t = [this.size]
+    let t = new Array(this.size)
     for (var i = 0; i < this.size; i++) {
       t[i] = list[i];
     }
@@ -38,7 +67,7 @@ class Sequence{
     if(start > end)
       return []
 
-    let t = [end - start]
+    let t = new Array(end - start)
     for (var i = start, j = 0; i < list.length && i < end; i++, j++) {
       t[j] = list[i]
     }
@@ -47,11 +76,8 @@ class Sequence{
 
   create_n_group_elements_from_set(item, groups,start)
   {
-    if(groups == 0)
-      return []
-
     let t = []
-    for (var i = start, m = 0; i < item.length ; i += groups, m++)
+    for (var i = start, m = 0; i + groups < item.length; i += groups, m++)
     {
       t[m] = this.copy_s_range(item,i, i + groups)
     }
@@ -71,12 +97,19 @@ class Sequence{
   gen_right(){
     let t = []
     let g = 1
+    let f = []
+
     for (var i = 0; i < this.size - 1; i++)
     {
       t[i] = this.copy_s_range(this.list,i + 1, this.size)
     }
 
-    return t
+    for (var i = 0; i < t.length; i++)
+    {
+      f[i] = this.create_n_group_elements_from_set(t[i],i + 1,0)
+    }
+
+    return f
   }
 
 
