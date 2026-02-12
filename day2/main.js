@@ -4,17 +4,10 @@ function main()
   max = 7;
   t = generate_num(11111,66666)
   k = pairDiceRollToPoints(t)
-  console.log(t)
-
-  ones = findSetsThatContainAValue(k,1)
-  twos = findSetsThatContainAValue(k, 2)
-  sixes = findSetsThatContainAValue(k, 6)
   lower_category = genLC(k)
+  threesKind = genUPC(k)
 
-  console.log(ones)
-  console.log(twos)
-  console.log(sixes)
-  console.log(lower_category)
+  console.log(lower_category,'\n',threesKind)
 }
 
 function modMe(n, m)
@@ -73,25 +66,6 @@ function pairDiceRollToPoints(dList){
   return t
 }
 
-function findOnes(dList){
-  let ones = []
-  for (var i = 0; i < dList.length; i++)
-  {
-    if(dList[i].item1[i] == 1)
-      ones.push(dList[i])
-    else
-    {
-      for(var j = 1; j < dList[i].item1.length; j++)
-        if(dList[i].item1[j] == 1)
-        {
-          ones.push(dList[i])
-          break
-        }
-     }
-  }
-  return ones
-}
-
 function findSetsThatContainAValue(dList,n){
   let t = []
   for (var i = 0; i < dList.length; i++)
@@ -116,7 +90,97 @@ function genLC(dList){
   for (var i = 1; i < 7; i++) {
     t.push(findSetsThatContainAValue(dList,i))
   }
-
   return t;
+}
 
+
+function genThreeKinds(dList){
+  let t = []
+  let k = 1;
+  let match = 0;
+  for (var i = 0; i < dList.length; i++)
+  {
+    for(var j = 0; j < dList[i].length; j++){
+
+      for(var f = 0; f < dList[i][j].item1.length && match < 5; f++)
+      {
+        if(dList[i][j].item1[f] == k)
+        {
+          match++;
+        }
+      }
+        if(match == 5)
+          t.push(dList[i][j])
+        match = 0
+
+    }
+        k++
+  }
+
+
+  return t
+}
+
+function genMatches(dList,m){
+  let t = []
+  let k = 1;
+  let match = 0;
+  for (var i = 0; i < dList.length; i++)
+  {
+    for(var j = 0; j < dList[i].length; j++){
+
+      for(var f = 0; f < dList[i][j].item1.length && match < m; f++)
+      {
+        if(dList[i][j].item1[f] == k)
+        {
+          match++;
+        }
+      }
+        if(match == m)
+          t.push(dList[i][j])
+        match = 0
+
+    }
+        k++
+  }
+  return t
+}
+
+function genMatches2(dList,m){
+  let t = []
+  let k = 1;
+  let match = 0;
+  for (var i = 0; k < 7; i++)
+  {
+    for(var j = 0; j < dList.length && match < m; j++)
+    {
+        if(dList[j] == k)
+        {
+          match++;
+        }
+    }
+        if(match == m)
+          t.push(dList)
+
+        match = 0
+
+        k++
+    }
+
+  return t
+}
+
+
+function genUPC(dList){
+  let t = []
+  matches = [3,4,5]
+  for (var i = 0; i < matches.length; i++)
+  {
+    for(var j = 0; j < dList.length; j++)
+    {
+      console.log(dList[j])
+      t.push(genMatches2(dList[j].item1,matches[i]))
+    }
+  }
+  return t
 }
