@@ -5,7 +5,7 @@ function main()
   t = generate_num(11111,66666)
   k = pairDiceRollToPoints(t)
   console.log(t)
-  
+
   ones = findOnes(k);
   twos = findSetsThatContainAValue(k, 2)
   sixes = findSetsThatContainAValue(k, 6)
@@ -107,4 +107,15 @@ function findSetsThatContainAValue(dList,n){
      }
   }
   return t
+}
+
+function generateLowerCateggory(dList){
+  t = []
+
+  for (var i = 0; i < dList.length; i++) {
+    t[i] = findSetsThatContainAValue(dList,i + 1)
+  }
+
+  return t;
+
 }
