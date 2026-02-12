@@ -6,13 +6,15 @@ function main()
   k = pairDiceRollToPoints(t)
   console.log(t)
 
-  ones = findOnes(k);
+  ones = findSetsThatContainAValue(k,1)
   twos = findSetsThatContainAValue(k, 2)
   sixes = findSetsThatContainAValue(k, 6)
+  lower_category = genLC(k)
 
   console.log(ones)
   console.log(twos)
   console.log(sixes)
+  console.log(lower_category)
 }
 
 function modMe(n, m)
@@ -22,8 +24,8 @@ function modMe(n, m)
 
 function genNum(n)
 {
-  k = n
-  t = []
+  let k = n
+  let t = []
   while(k >= 1)
   {
     r = Math.floor(k % 10)
@@ -40,8 +42,8 @@ function genNum(n)
 
 function generate_num(i, t)
 {
-  k = 0;
-  numbers = []
+  let k = 0;
+  let numbers = []
   while(i <= t)
   {
     s = genNum(i++)
@@ -53,7 +55,7 @@ function generate_num(i, t)
 
 function calculatePoints(diceList)
 {
-  m = 0
+  let m = 0
   for (var i = 0; i < diceList.length; i++)
   {
     m += diceList[i];
@@ -63,7 +65,7 @@ function calculatePoints(diceList)
 }
 
 function pairDiceRollToPoints(dList){
-  t = []
+  let t = []
   for (var i = 0; i < dList.length; i++)
   {
       t.push(new Pair(dList[i], calculatePoints(dList[i])))
@@ -72,7 +74,7 @@ function pairDiceRollToPoints(dList){
 }
 
 function findOnes(dList){
-  ones = []
+  let ones = []
   for (var i = 0; i < dList.length; i++)
   {
     if(dList[i].item1[i] == 1)
@@ -91,7 +93,7 @@ function findOnes(dList){
 }
 
 function findSetsThatContainAValue(dList,n){
-  t = []
+  let t = []
   for (var i = 0; i < dList.length; i++)
   {
     if(dList[i].item1[i] == n)
@@ -109,11 +111,10 @@ function findSetsThatContainAValue(dList,n){
   return t
 }
 
-function generateLowerCateggory(dList){
-  t = []
-
-  for (var i = 0; i < dList.length; i++) {
-    t[i] = findSetsThatContainAValue(dList,i + 1)
+function genLC(dList){
+  let t = []
+  for (var i = 1; i < 7; i++) {
+    t.push(findSetsThatContainAValue(dList,i))
   }
 
   return t;
