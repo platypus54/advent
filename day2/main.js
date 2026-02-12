@@ -3,12 +3,13 @@ function main()
 {
   max = 7;
   t = generate_num(11111,66666)
-
+  k = pairDiceRollToPoints(t)
   console.log(t)
 
 }
 
-function modMe(n, m){
+function modMe(n, m)
+{
   return ((( n % m) + m) % m);
 }
 
@@ -22,6 +23,7 @@ function genNum(n)
     k = k / 10
     t.unshift(modMe(Math.floor(r), 7))
   }
+
   return t;
 }
 
@@ -35,4 +37,23 @@ function generate_num(i, t)
     numbers.push(genNum(i++))
   }
   return numbers
+}
+
+function calculatePoints(diceList)
+{
+  m = 0
+  for (var i = 0; i < diceList.length; i++)
+  {
+    m += diceList[i];
+  }
+  return m;
+}
+
+function pairDiceRollToPoints(dList){
+  t = []
+  for (var i = 0; i < dList.length; i++)
+  {
+      t.push(new Pair(dList[i], calculatePoints(dList[i])))
+  }
+  return t
 }
