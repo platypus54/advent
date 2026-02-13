@@ -93,34 +93,6 @@ function genLC(dList){
   return t;
 }
 
-
-function genThreeKinds(dList){
-  let t = []
-  let k = 1;
-  let match = 0;
-  for (var i = 0; i < dList.length; i++)
-  {
-    for(var j = 0; j < dList[i].length; j++){
-
-      for(var f = 0; f < dList[i][j].item1.length && match < 5; f++)
-      {
-        if(dList[i][j].item1[f] == k)
-        {
-          match++;
-        }
-      }
-        if(match == 5)
-          t.push(dList[i][j])
-        match = 0
-
-    }
-        k++
-  }
-
-
-  return t
-}
-
 function genMatches(dList,m){
   let t = []
   let k = 1;
@@ -169,7 +141,6 @@ function genMatches2(dList,m){
 
   return t
 }
-
 
 function genUPC(dList){
   let t = []
