@@ -130,14 +130,14 @@ function genKinds(dList){
   }
   return t
 }
-// o' the dilemma
+
 function genMatchesFH(dList,m){
   let t = []
   let match = 0;
-  for (var i = 0; i < 7; i++)
+  for (var i = 1; i < 7; i++)
   {
-    q1 = []
-    q2 = []
+    let q1 = []
+    let q2 = []
     for(var j = 0; j < dList.length && match < m; j++)
     {
         if(dList[j] == i)
@@ -145,16 +145,16 @@ function genMatchesFH(dList,m){
           q1.push(dList[j])
           match++;
         }
-        else {
+        else{
           q2.push(dList[j])
         }
-
+        console.log(q1,q2)
     }
-    console.log(q1,q2)
-        if(q1.length == m)
-            t.push(dList)
 
-
+        if( q1.length == m && q2.length == 2)
+          if(q1[0] != q2[0] && q2[0] == q2[1])
+              t.push(dList)
+              
         match = 0
 
         k++
