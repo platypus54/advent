@@ -5,9 +5,10 @@ function main()
   t = generate_num(11111,66666)
   k = pairDiceRollToPoints(t)
   lower_category = genLC(k)
-  threesKind = genUPC(k)
+  kinds = genKinds(k)
+  fH = genFullHouse(kinds[0])
 
-  console.log(lower_category,'\n',threesKind)
+  console.log(lower_category,'\n',kinds,'\n',fH)
 }
 
 function modMe(n, m)
@@ -97,31 +98,6 @@ function genMatches(dList,m){
   let t = []
   let k = 1;
   let match = 0;
-  for (var i = 0; i < dList.length; i++)
-  {
-    for(var j = 0; j < dList[i].length; j++){
-
-      for(var f = 0; f < dList[i][j].item1.length && match < m; f++)
-      {
-        if(dList[i][j].item1[f] == k)
-        {
-          match++;
-        }
-      }
-        if(match == m)
-          t.push(dList[i][j])
-        match = 0
-
-    }
-        k++
-  }
-  return t
-}
-
-function genMatches2(dList,m){
-  let t = []
-  let k = 1;
-  let match = 0;
   for (var i = 0; i < 7; i++)
   {
     for(var j = 0; j < dList.length && match < m; j++)
@@ -138,11 +114,10 @@ function genMatches2(dList,m){
 
         k++
     }
-
   return t
 }
 
-function genUPC(dList){
+function genKinds(dList){
   let t = []
   matches = [3,4,5]
   for (var i = 0; i < matches.length; i++)
@@ -150,12 +125,49 @@ function genUPC(dList){
     g = []
     for(var j = 0; j < dList.length; j++)
     {
-      console.log(dList[j])
-      s = genMatches2(dList[j].item1,matches[i])
+      s = genMatches(dList[j].item1,matches[i])
       if(s.length > 0)
-        g.push(s)
+        g.push(dList[j])
     }
     t.push(g)
   }
   return t
+}
+
+function genMatchesFH(dList,m){
+  let t = []
+  let k = 1;
+  let match = 0;
+  for (var i = 0; i < 7; i++)
+  {
+    for(var j = 0; j < dList.length && match < m; j++)
+    {
+        if(dList[j] == k)
+        {
+          match++;
+        }
+    }
+        if(match == m)
+          if(dList[dList.length - 2] == dList[dList.length - 1] && dList[0] != dList[dList.length - 1])
+          {
+            t.push(dList)
+          }
+
+        match = 0
+
+        k++
+    }
+  return t
+}
+
+
+function genFullHouse(threeofkindsList)
+{
+  t = []
+  for (var i = 0; i < threeofkindsList.length; i++) {
+    s = genMatchesFH(threeofkindsList[i].item1,3)
+    if(s.length > 0)
+      t.push(threeofkindsList[i])
+  }
+  return t;
 }
