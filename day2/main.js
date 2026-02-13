@@ -96,13 +96,12 @@ function genLC(dList){
 
 function genMatches(dList,m){
   let t = []
-  let k = 1;
   let match = 0;
   for (var i = 0; i < 7; i++)
   {
     for(var j = 0; j < dList.length && match < m; j++)
     {
-        if(dList[j] == k)
+        if(dList[j] == i)
         {
           match++;
         }
@@ -111,8 +110,6 @@ function genMatches(dList,m){
           t.push(dList)
 
         match = 0
-
-        k++
     }
   return t
 }
@@ -133,25 +130,30 @@ function genKinds(dList){
   }
   return t
 }
-
+// o' the dilemma
 function genMatchesFH(dList,m){
   let t = []
-  let k = 1;
   let match = 0;
   for (var i = 0; i < 7; i++)
   {
+    q1 = []
+    q2 = []
     for(var j = 0; j < dList.length && match < m; j++)
     {
-        if(dList[j] == k)
+        if(dList[j] == i)
         {
+          q1.push(dList[j])
           match++;
         }
+        else {
+          q2.push(dList[j])
+        }
+
     }
-        if(match == m)
-          if(dList[dList.length - 2] == dList[dList.length - 1] && dList[0] != dList[dList.length - 1])
-          {
+    console.log(q1,q2)
+        if(q1.length == m)
             t.push(dList)
-          }
+
 
         match = 0
 
