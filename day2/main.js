@@ -150,7 +150,7 @@ function genMatches2(dList,m){
   let t = []
   let k = 1;
   let match = 0;
-  for (var i = 0; k < 7; i++)
+  for (var i = 0; i < 7; i++)
   {
     for(var j = 0; j < dList.length && match < m; j++)
     {
@@ -176,11 +176,15 @@ function genUPC(dList){
   matches = [3,4,5]
   for (var i = 0; i < matches.length; i++)
   {
+    g = []
     for(var j = 0; j < dList.length; j++)
     {
       console.log(dList[j])
-      t.push(genMatches2(dList[j].item1,matches[i]))
+      s = genMatches2(dList[j].item1,matches[i])
+      if(s.length > 0)
+        g.push(s)
     }
+    t.push(g)
   }
   return t
 }
